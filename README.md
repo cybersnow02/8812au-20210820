@@ -361,7 +361,7 @@ Secure Boot: see FAQ.
 1. Clone this repository.
 
    ``` shell
-   git clone https://github.com/morrownr/8812au-20210820.git
+   git clone https://github.com/cybersnow02/8812au-20210820.git
    ```
 
 1. Move to the newly created driver directory.
