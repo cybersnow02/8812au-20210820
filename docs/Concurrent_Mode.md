@@ -35,20 +35,20 @@ ${EDITOR} Makefile
 Change the following line:
 
 ```
-#EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+#ccflags-y += -DCONFIG_CONCURRENT_MODE
 ```
 
 to 
 
 ```
-EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+ccflags-y += -DCONFIG_CONCURRENT_MODE
 ```
 
 and then install the driver per the installation steps. If
 the driver is already installed, run the following first:
 
 ```
-sudo ./remove-driver.sh
+sudo ./uninstall-driver.sh
 ```
 
 and then reinstall the driver with:
