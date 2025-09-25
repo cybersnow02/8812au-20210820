@@ -8,7 +8,7 @@
 > Please read the file ["supported-device-IDs"](./supported-device-IDs) for information about how to confirm that this is the correct driver for your adapter.
 
 > [!NOTE]
-> As of Linux kernel 6.14, a Linux Standards comliant driver for the rtl8812au chipset is available and should make your adapter both plug and play and more feature filled.
+> As of Linux kernel 6.14, a Linux Standards compliant driver for the rtl8812au chipset is available and should make your adapter both plug and play and more feature filled.
 >
 > Additional information about this new driver along with ability to report bugs can be found at the following link:
 >
