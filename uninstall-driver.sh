@@ -6,19 +6,19 @@
 #
 # To make this file executable:
 #
-# $ chmod +x remove-driver.sh
+# $ chmod +x uninstall-driver.sh
 #
 # To execute this file:
 #
-# $ sudo ./remove-driver.sh
+# $ sudo ./uninstall-driver.sh
 #
 # or
 #
-# $ sudo sh remove-driver.sh
+# $ sudo sh uninstall-driver.sh
 #
 # To check for errors and to check that this script does not require bash:
 #
-# $ shellcheck remove-driver.sh
+# $ shellcheck uninstall-driver.sh
 #
 # Copyright(c) 2024 Nick Morrow
 #
@@ -31,7 +31,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 
-SCRIPT_NAME="remove-driver.sh"
+SCRIPT_NAME="uninstall-driver.sh"
 SCRIPT_VERSION="20240409"
 
 MODULE_NAME="8812au"
