@@ -1,20 +1,3 @@
-Notice: An updated standards compliant (mac80211), in-kernel driver for rtl8812au chipset based adapters and modules is available and as of kernel 6.14 is of good quality. If your distro uses kernel 6.14 or later, there is no need to install this driver. The in-kernel driver is part of the rtw88 series of drivers. The in-kernel driver is Linux Standards compliant (mac80211) and is a much better driver than this one. This driver will no longer get API related updates beyond kernel 6.14 (unless provided by a user). If you use a kernel prior to 6.14, it is possible to use the new standards compliant driver by going to the following repo:
-
-https://github.com/lwfinger/rtw88
-
-If you decide to use the in-kernel driver, remember to first remove the driver in this repo. You can run the following to remove the driver in this repo:
-
-$ sudo sh remove-driver.sh
-
-It has been my pleasure to maintain this driver for the last several years. Thanks to all of those who helped.
-
-Remember: Ask not what your operating system can do for you, but what you can do for your operating system.
-
-Regards,
-
-@morrownr
-
-
 ## 8812au ( 8812au.ko ) :rocket:
 
 ## Linux Driver for USB WiFi Adapters that are based on the RTL8812AU Chipset
@@ -23,6 +6,13 @@ Regards,
 
 > [!NOTE]
 > Please read the file ["supported-device-IDs"](./supported-device-IDs) for information about how to confirm that this is the correct driver for your adapter.
+
+> [!NOTE]
+> As of Linux kernel 6.14, a Linux Standards comliant driver for the rtl8812au chipset is available and should make your adapter both plug and play and more feature filled.
+>
+> Additional information about this new driver along with ability to report bugs can be found at the following link:
+>
+> https://github.com/lwfinger/rtw88
 
 > [!NOTE]
 > The following links provide a lot of information about USB WiFi and are recommended reading:
@@ -81,7 +71,7 @@ Regards,
 ### Compatible Kernels
 
 - Kernels: 5.10 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.14 (community support)
+- Kernels: 5.12 - 6.16 (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
@@ -102,7 +92,7 @@ Note: Kernels earlier than 5.10 may work but are not tested.
    - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
 
 - [Debian](https://www.debian.org/)
-  - Kernels 5.10, 5.15, 6.1 and 6.6
+  - Kernels 5.10, 5.15, 6.1, 6.6 to 6.16
 
 - [Fedora](https://getfedora.org)
   - Fedora 38 (6.2.13-300)
@@ -541,7 +531,7 @@ To upgrade, perform the following steps:
 
    The `install-driver.sh` script will automatically remove the previously installed driver.
 
-### Removal of the Driver (`remove-driver.sh`)
+### Removal of the Driver (`uninstall-driver.sh`)
 
 Removing the driver is advised in the following situations:
 
@@ -552,7 +542,7 @@ The driver directory can be deleted after running this script.
 
 1. Open a terminal (e.g. Ctrl+Alt+T).
 1. Move to the driver directory, e.g. `cd ~/src/8812au-20210629`.
-1. Run the removal script: `sudo ./remove-driver.sh`
+1. Run the removal script: `sudo ./uninstall-driver.sh`
 
    For automated builds (non-interactive), use `NoPrompt` as an option.
 
