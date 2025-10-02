@@ -139,13 +139,6 @@ if [ $NO_PROMPT -ne 1 ]; then
 	echo "-----------------------------------------------------------------"
 	echo "Please copy and post all displayed lines when reporting an issue!"
 	echo "-----------------------------------------------------------------"
-	printf "Press Enter to continue..."
-	read -r yn
-	case "$yn" in
-#		[nN]) exit ;;
-#		*) clear ;;
-		*) ;;
-	esac
 	echo
 fi
 
