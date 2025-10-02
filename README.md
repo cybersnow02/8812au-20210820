@@ -71,7 +71,7 @@
 ### Compatible Kernels
 
 - Kernels: 5.10 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.16 (community support)
+- Kernels: 5.12 - 6.17 (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
@@ -80,19 +80,19 @@ Note: Kernels earlier than 5.10 may work but are not tested.
 
 - gcc 12, 13 and 14
 
-### Tested Linux Distributions
+### Tested Linux Distributions (Not Up-to-date for all Linux Distributions)
 
 > [!NOTE]
-> The information in this section depends largely on user reports which can be provided via PR or message in Issues.
+> The information in this section depends largely on user reports which can be provided via PR or message in Issues. So this list is not updated frequently and might not be updated in the future. To have more success on building this driver for your Linux Distribution, please check that your Kernel version match the supported versions in this README (see Compatible Kernels section). Usually, it should build fine for most recent Linux Distribution with a supported Kernel and some others tools like the GCC compiler and DKMS. So the updates are focused mainly on these. To get your Kernel version, enter this command in a console/terminal :  uname -v
 
 - [Arch Linux](https://www.archlinux.org)
   - Kernels 5.4, 5.11 and 6.6
 
 - [Armbian](https://www.armbian.com/)
-   - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
+  - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
 
 - [Debian](https://www.debian.org/)
-  - Kernels 5.10, 5.15, 6.1, 6.6 to 6.16
+  - Kernels 5.10, 5.15, 6.1, 6.6 to 6.17
 
 - [Fedora](https://getfedora.org)
   - Fedora 38 (6.2.13-300)
