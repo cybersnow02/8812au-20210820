@@ -92,7 +92,7 @@ Note: Kernels earlier than 5.10 may work but are not tested.
   - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
 
 - [Debian](https://www.debian.org/)
-  - Kernels 5.10, 5.15, 6.1, 6.6 to 6.17
+  - Kernels 5.10, 5.15, 6.1 to 6.17
 
 - [Fedora](https://getfedora.org)
   - Fedora 38 (6.2.13-300)
