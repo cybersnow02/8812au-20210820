@@ -8,11 +8,7 @@
 > Please read the file ["supported-device-IDs"](./supported-device-IDs) for information about how to confirm that this is the correct driver for your adapter.
 
 > [!NOTE]
-> As of Linux kernel 6.14, a Linux Standards compliant driver for the rtl8812au chipset is available and should make your adapter both plug and play and more feature filled.
->
-> Additional information about this new driver along with ability to report bugs can be found at the following link:
->
-> https://github.com/lwfinger/rtw88
+> As of Linux kernel 6.14, a driver is now included for this device. But, you might want to continue using this driver for various reasons as it offers some interesting options you can configure (see file 8812au.conf for more details).
 
 > [!NOTE]
 > The following links provide a lot of information about USB WiFi and are recommended reading:
@@ -46,6 +42,7 @@
 - VHT control (allows 80 MHz channel width in AP mode)
 - AP mode DFS channel control
 - USB mode control
+- TXPower control to get extra power if needed (see file 8812au.conf for more details)
 
 > [!NOTE]
 > Monitor mode is not supported.
@@ -116,7 +113,7 @@ Note: Kernels earlier than 5.10 may work but are not tested.
     - Kernel 6.8
   - 24.10
     - Kernel 6.11
-  - 
+    
 
 #### Red Hat Enterprise Linux (RHEL)
 
@@ -629,9 +626,3 @@ To Contribute:
 - Make your edits.
 - TEST THEM!
 - Create a pull request.
-
------
-
-#### [Go to Main Menu](https://github.com/morrownr/USB-WiFi)
-
------
