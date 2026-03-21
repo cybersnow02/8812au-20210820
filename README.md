@@ -8,7 +8,7 @@
 > Please read the file ["supported-device-IDs"](./supported-device-IDs) for information about how to confirm that this is the correct driver for your adapter.
 
 > [!NOTE]
-> As of Linux kernel 6.14, a driver is now included for this device. But, you might want to continue using this driver for various reasons as it offers some interesting options you can configure (see file 8812au.conf for more details).
+> As of Linux kernel 6.14, a new driver is now included for this device, named RTW88. But, you might want to continue using this driver for various reasons as it offers some interesting options you can configure (see file 8812au.conf for more details). If using this driver, it will automatically disable/blacklist the new RTW88 driver. If you want to come back to RTW88, you can simply delete the file 8812au.conf usually located in /etc/modprobe.d (or use the uninstall-driver.sh script) then reboot your computer. 
 
 > [!NOTE]
 > The following links provide a lot of information about USB WiFi and are recommended reading:
@@ -68,7 +68,7 @@
 ### Compatible Kernels
 
 - Kernels: 5.10 - 5.11 (Realtek)
-- Kernels: 5.12 - 6.17 (community support)
+- Kernels: 5.12 - 6.19 (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
@@ -89,7 +89,7 @@ Note: Kernels earlier than 5.10 may work but are not tested.
   - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
 
 - [Debian](https://www.debian.org/)
-  - Kernels 5.10, 5.15, 6.1 to 6.17
+  - Kernels 5.10, 5.15, 6.1 to 6.19
 
 - [Fedora](https://getfedora.org)
   - Fedora 38 (6.2.13-300)
