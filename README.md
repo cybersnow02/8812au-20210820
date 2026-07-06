@@ -5,6 +5,10 @@
 - v5.13.6-23-g232107d9b.20210820 (Realtek) plus updates from the Linux community
 
 > [!NOTE]
+> Before you compile this driver on your system, please read this comment about how to get a better WIFI stability by using a better WIFI Manager Backends. Most Linux systems use 'wpasupplicant' as the default backends. I've found out using 'iwd' from intel is way better for connection stability, and it cans be used with NetworkManager.
+https://github.com/lwfinger/rtw88/issues/111#issuecomment-4894518431
+
+> [!NOTE]
 > Please read the file ["supported-device-IDs"](./supported-device-IDs) for information about how to confirm that this is the correct driver for your adapter.
 
 > [!NOTE]
