@@ -106,7 +106,7 @@ CONFIG_RTW_ADAPTIVITY_MODE = normal
 CONFIG_SIGNAL_SCALE_MAPPING = n
 CONFIG_80211W = y
 CONFIG_REDUCE_TX_CPU_LOADING = n
-CONFIG_BR_EXT = y
+CONFIG_BR_EXT = n
 CONFIG_TDLS = y
 CONFIG_WIFI_MONITOR = n
 CONFIG_MCC_MODE = n
@@ -130,7 +130,7 @@ ccflags-y += -DCONFIG_RTW_ANDROID=$(CONFIG_RTW_ANDROID)
 endif
 
 ########################## Debug ###########################
-CONFIG_RTW_DEBUG = y
+CONFIG_RTW_DEBUG = n
 # default log level is _DRV_INFO_ = 4,
 # please refer to "How_to_set_driver_debug_log_level.doc" to set the available level.
 CONFIG_RTW_LOG_LEVEL = 0
