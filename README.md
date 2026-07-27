@@ -73,7 +73,7 @@ https://github.com/lwfinger/rtw88/issues/111#issuecomment-4894518431
 
 - Kernels: 5.10 - 5.11 (Realtek)
 - Kernels: 5.12 - 6.19 (community support)
-- Kernels: 7.0 -       (community support)
+- Kernels: 7.0  - 7.1      (community support)
 
 > [!NOTE]
 Note: Kernels earlier than 5.10 may work but are not tested.
@@ -94,7 +94,7 @@ Note: Kernels earlier than 5.10 may work but are not tested.
   - Kernel 5.15 (Rock 4 SE (Rock 4b image with xfce))
 
 - [Debian](https://www.debian.org/)
-  - Kernels 5.10, 5.15, 6.1 to 6.19, 7.0
+  - Kernels 5.10, 5.15, 6.1 to 6.19, 7.0, 7.1
 
 - [Fedora](https://getfedora.org)
   - Fedora 38 (6.2.13-300)
@@ -119,7 +119,7 @@ Note: Kernels earlier than 5.10 may work but are not tested.
   - 24.10
     - Kernel 6.11
   - 26.04
-    - Kernel 7.0
+    - Kernel 7.0, 7.1
     
 
 #### Red Hat Enterprise Linux (RHEL)
