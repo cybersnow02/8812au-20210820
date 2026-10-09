@@ -5842,7 +5842,11 @@ void phydm_fw_trace_handler(void *dm_void, u8 *cmd_buf, u8 cmd_len)
 		  "[FW debug message] freg_num = (( %d )), c2h_seq=(( %d ))\n",
 		  freg_num, c2h_seq);
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 2, 0))
+	strscpy(debug_trace_11byte, &cmd_buf[1], (cmd_len - 1));
+#else
 	strncpy(debug_trace_11byte, &cmd_buf[1], (cmd_len - 1));
+#endif
 	debug_trace_11byte[cmd_len - 1] = '\0';
 	PHYDM_DBG(dm, DBG_FW_TRACE, "[FW debug message] %s\n",
 		  debug_trace_11byte);
@@ -5873,7 +5877,11 @@ void phydm_fw_trace_handler(void *dm_void, u8 *cmd_buf, u8 cmd_len)
 		return;
 	}
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 2, 0))
+	strscpy((char *)&dm->fw_debug_trace[dm->c2h_cmd_start],
+#else
 	strncpy((char *)&dm->fw_debug_trace[dm->c2h_cmd_start],
+#endif
 		(char *)&cmd_buf[1], (cmd_len - 1));
 	dm->c2h_cmd_start += (cmd_len - 1);
 	dm->fw_buff_is_enpty = false;
