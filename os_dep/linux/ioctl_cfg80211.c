@@ -2042,9 +2042,11 @@ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev
 		ret = -ENOTSUPP;
 		goto addkey_end;
 	}
-
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 2, 0))
+	strscpy_pad((char *)param->u.crypt.alg, alg_name, IEEE_CRYPT_ALG_NAME_LEN);
+#else
 	strncpy((char *)param->u.crypt.alg, alg_name, IEEE_CRYPT_ALG_NAME_LEN);
-
+#endif
 
 	if (!mac_addr || is_broadcast_ether_addr(mac_addr)
 		#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 37)) || defined(COMPAT_KERNEL_RELEASE)
@@ -5121,7 +5123,11 @@ static int rtw_cfg80211_add_monitor_if(_adapter *padapter, char *name, struct ne
 	}
 
 	mon_ndev->type = ARPHRD_IEEE80211_RADIOTAP;
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 2, 0))
+	strscpy(mon_ndev->name, name, IFNAMSIZ);
+#else
 	strncpy(mon_ndev->name, name, IFNAMSIZ);
+#endif
 	mon_ndev->name[IFNAMSIZ - 1] = 0;
 #if (LINUX_VERSION_CODE > KERNEL_VERSION(4, 11, 8))
 	mon_ndev->priv_destructor = rtw_ndev_destructor;
@@ -7664,8 +7670,19 @@ static s32 cfg80211_rtw_remain_on_channel(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 8, 0))
 	enum nl80211_channel_type channel_type,
 #endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0))
+	unsigned int duration, u64 cookie_in)
+#endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 2, 0)) && (LINUX_VERSION_CODE < KERNEL_VERSION(7, 3, 0))
+	unsigned int duration, u64 *cookie, const u8 *rx_addr)
+#endif
+#if (LINUX_VERSION_CODE <= KERNEL_VERSION(7, 1, 0))
 	unsigned int duration, u64 *cookie)
+#endif
 {
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0))
+	u64 *cookie = &cookie_in;
+#endif
 	s32 err = 0;
 	u8 remain_ch = (u8) ieee80211_frequency_to_channel(channel->center_freq);
 	_adapter *padapter = NULL;
@@ -7709,9 +7726,10 @@ static s32 cfg80211_rtw_remain_on_channel(struct wiphy *wiphy,
 	is_p2p_find = (duration < (pwdinfo->ext_listen_interval)) ? _TRUE : _FALSE;
 #endif
 #endif
-
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0))
+#else
 	*cookie = ATOMIC_INC_RETURN(&prochinfo->ro_ch_cookie_gen);
-
+#endif
 	RTW_INFO(FUNC_ADPT_FMT"%s ch:%u duration:%d, cookie:0x%llx\n"
 		, FUNC_ADPT_ARG(padapter), wdev == wiphy_to_pd_wdev(wiphy) ? " PD" : ""
 		, remain_ch, duration, *cookie);
@@ -8256,7 +8274,11 @@ static int cfg80211_rtw_mgmt_tx(struct wiphy *wiphy,
 #else
 	struct cfg80211_mgmt_tx_params *params,
 #endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0))
+	u64 cookie_in)
+#else
 	u64 *cookie)
+#endif
 {
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 14, 0)) || defined(COMPAT_KERNEL_RELEASE)
 	struct ieee80211_channel *chan = params->chan;
@@ -8266,6 +8288,9 @@ static int cfg80211_rtw_mgmt_tx(struct wiphy *wiphy,
 #endif
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(3, 2, 0))
 	bool no_cck = 0;
+#endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0))
+	u64 *cookie = &cookie_in;
 #endif
 	int ret = 0;
 	u8 tx_ret;
@@ -8333,7 +8358,10 @@ static int cfg80211_rtw_mgmt_tx(struct wiphy *wiphy,
 	pwdev_priv = adapter_wdev_data(padapter);
 
 	/* cookie generation */
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(7, 3, 0))
+#else
 	*cookie = pwdev_priv->mgmt_tx_cookie++;
+#endif
 
 #ifdef CONFIG_DEBUG_CFG80211
 	RTW_INFO(FUNC_ADPT_FMT"%s len=%zu, ch=%d"
