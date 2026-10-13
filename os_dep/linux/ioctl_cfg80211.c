@@ -10389,7 +10389,10 @@ static int rtw_cfg80211_init_wiphy(_adapter *adapter, struct wiphy *wiphy)
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0))
 #ifdef CONFIG_WIFI_MONITOR
 	/* Currently only for Monitor debugging */
+	/* WIPHY_FLAG_SUPPORTS_5_10_MHZ removed in kernel 7.2 (torvalds/linux 1a15bf9708ba) */
+	#if (LINUX_VERSION_CODE < KERNEL_VERSION(7, 2, 0))
 	wiphy->flags |= WIPHY_FLAG_SUPPORTS_5_10_MHZ;
+	#endif
 #endif
 #endif /* (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 11, 0)) */
 
