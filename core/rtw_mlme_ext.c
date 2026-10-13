@@ -12291,6 +12291,16 @@ static void rtw_mlmeext_disconnect(_adapter *padapter)
 		self_action = MLME_STA_DISCONNECTED;
 	else if (MLME_IS_ADHOC(padapter) || MLME_IS_ADHOC_MASTER(padapter))
 		self_action = MLME_ADHOC_STOPPED;
+#ifdef CONFIG_WIFI_MONITOR
+	else if (MLME_IS_MONITOR(padapter)) {
+		/* A disconnect can still be dispatched after the interface has
+		   already moved to monitor state (e.g. NetworkManager racing with
+		   "iw set type monitor"). There is nothing to disconnect, but
+		   leaving self_action as MLME_ACTION_UNKNOWN makes
+		   rtw_dfs_rd_en_decision() hit its default: rtw_warn_on(1) too. */
+		self_action = MLME_ACTION_NONE;
+	}
+#endif
 	else {
 		RTW_INFO("state:0x%x\n", MLME_STATE(padapter));
 		rtw_warn_on(1);
