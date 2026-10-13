@@ -748,7 +748,15 @@ s16 rtw_adapter_get_oper_txpwr_max_mbm(_adapter *adapter, bool eirp)
 {
 	s16 mbm = -100 * MBM_PDBM;
 
+	/* In monitor mode there is no association, but cur_channel/bw/offset are
+	   populated (see rtw_set_chbw_hdl) and tx_rate is always initialised in
+	   init_mlme_ext_priv(), so the power calculation is valid all the same.
+	   Without this, cfg80211_rtw_get_txpower() returns the -100.00 dBm floor. */
+#ifdef CONFIG_WIFI_MONITOR
+	if (MLME_IS_ASOC(adapter) || MLME_IS_MONITOR(adapter)) {
+#else
 	if (MLME_IS_ASOC(adapter)) {
+#endif
 		struct mlme_ext_priv *mlmeext = &adapter->mlmeextpriv;
 		u8 ch = mlmeext->cur_channel;
 		u8 bw = mlmeext->cur_bwmode;
