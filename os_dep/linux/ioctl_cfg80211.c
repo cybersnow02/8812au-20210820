@@ -4952,6 +4952,11 @@ static int rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_de
 	/* Skip the ratio tap header */
 	skb_pull(skb, rtap_len);
 
+	/* Need a full 802.11 header before dereferencing it: addr1/addr2 live at
+	   offsets 4 and 10, so a shorter frame would read out of bounds. */
+	if (unlikely(skb->len < sizeof(struct rtw_ieee80211_hdr_3addr)))
+		goto fail;
+
 	dot11_hdr = (struct rtw_ieee80211_hdr *)skb->data;
 	frame_ctl = le16_to_cpu(dot11_hdr->frame_ctl);
 	/* Check if the QoS bit is set */
@@ -4970,6 +4975,11 @@ static int rtw_cfg80211_monitor_if_xmit_entry(struct sk_buff *skb, struct net_de
 		/* Skip the 802.11 header, QoS (if any) and SNAP, but leave spaces for
 		 * for two MAC addresses
 		 */
+		/* skb_pull() below would underflow on a truncated frame, and the
+		   memcpy()s after it would then write past the buffer. */
+		if (unlikely(skb->len < dot11_hdr_len + qos_len + snap_len))
+			goto fail;
+
 		skb_pull(skb, dot11_hdr_len + qos_len + snap_len - sizeof(src_mac_addr) * 2);
 		pdata = (unsigned char *)skb->data;
 		memcpy(pdata, dst_mac_addr, sizeof(dst_mac_addr));
