@@ -76,7 +76,7 @@ https://github.com/lwfinger/rtw88/issues/111#issuecomment-4894518431
 - Kernels: 7.0  - 7.1      (community support)
 
 > [!NOTE]
-Note: Kernels earlier than 5.10 may work but are not tested.
+Note: Kernels earlier than 5.10 may work but are not tested. Also, see Ubuntu Linux Distro Warning about their custom kernels which could break this driver (see below).
 
 ### Tested Compilers
 
@@ -120,7 +120,9 @@ Note: Kernels earlier than 5.10 may work but are not tested.
     - Kernel 6.11
   - 26.04
     - Kernel 7.0, 7.1
-    
+   
+  - Ubuntu Kernel upgrade warning: Ubuntu Kernel team is backporting fixes from newer Kernels to their main (older) official kernels. Sometimes, those fixes include newer features not intended to be used on older kernels. This will then break this Realtek driver and others drivers too because those fixes are specific to a particular kernel version. This is then impossible to implement compatibility measures in this driver source code between the original Linux Kernel and the Ubuntu custom Kernel of the same Kernel version. So if the compilation fails under Ubuntu, this might be the reason. Technically, only important security fixes should be ported to an older kernel but this is not what is happening here for Ubuntu. I've seen a Ubuntu kernel version 6.8.0 looks like a kernel version 6.12. So this lead to a major problem. This driver code cannot distinguish the differences about the Official Kernel from Linus Torvald and the one supplied by Ubuntu. So if you have any compiling issues, to help fix that, I suggest you trying to always upgrade to the latest Linux Kernel from the Backports Ubuntu Repo of your current distro. This should be a rare issue.
+
 
 #### Red Hat Enterprise Linux (RHEL)
 
