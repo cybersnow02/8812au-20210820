@@ -112,7 +112,7 @@ Note: Kernels earlier than 5.10 may work but are not tested. Also, see Ubuntu Li
      - Kernel 5.10, x86_32
 
 - [Ubuntu](https://www.ubuntu.com)
-  - * See Warning below
+  - See Warning below
   - 22.04
     - Kernel 5.15
   - 24.04
