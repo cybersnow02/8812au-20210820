@@ -116,7 +116,7 @@ Note: Kernels earlier than 5.10 may work but are not tested. Also, see Ubuntu Li
   - 22.04
     - Kernel 5.15
   - 24.04
-    - Kernel 6.8 (problem for 6.8.0-147, October 13, 2026)
+    - Kernel 6.8
   - 24.10
     - Kernel 6.11
   - 26.04
