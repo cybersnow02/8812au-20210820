@@ -12291,6 +12291,16 @@ static void rtw_mlmeext_disconnect(_adapter *padapter)
 		self_action = MLME_STA_DISCONNECTED;
 	else if (MLME_IS_ADHOC(padapter) || MLME_IS_ADHOC_MASTER(padapter))
 		self_action = MLME_ADHOC_STOPPED;
+#ifdef CONFIG_WIFI_MONITOR
+	else if (MLME_IS_MONITOR(padapter)) {
+		/* A disconnect can still be dispatched after the interface has
+		   already moved to monitor state (e.g. NetworkManager racing with
+		   "iw set type monitor"). There is nothing to disconnect, but
+		   leaving self_action as MLME_ACTION_UNKNOWN makes
+		   rtw_dfs_rd_en_decision() hit its default: rtw_warn_on(1) too. */
+		self_action = MLME_ACTION_NONE;
+	}
+#endif
 	else {
 		RTW_INFO("state:0x%x\n", MLME_STATE(padapter));
 		rtw_warn_on(1);
@@ -16361,7 +16371,21 @@ u8 rtw_set_chbw_hdl(_adapter *padapter, u8 *pbuf)
 			iface->mlmepriv.cur_network.network.Configuration.DSConfig = set_ch_parm->ch;
 		}
 	}
-	
+
+#ifdef CONFIG_WIFI_MONITOR
+	/* In monitor mode there is no associated STA, so ifbmp_s == 0 and the
+	   block above is skipped: cur_channel/bw/offset keep their init value
+	   (rtw_channel, channel 1) while set_channel_bwmode() below does move
+	   the hardware. cfg80211_rtw_get_channel() reads cur_channel, so
+	   nl80211 reports a stale channel and aireplay-ng aborts on the
+	   mismatch. Propagate the channel to the state .get_channel reads. */
+	if (MLME_IS_MONITOR(padapter)) {
+		pmlmeext->cur_channel   = set_ch_parm->ch;
+		pmlmeext->cur_bwmode    = set_ch_parm->bw;
+		pmlmeext->cur_ch_offset = set_ch_parm->ch_offset;
+	}
+#endif
+
 	LeaveAllPowerSaveModeDirect(padapter);
 	
 	set_channel_bwmode(padapter, set_ch_parm->ch, set_ch_parm->ch_offset, set_ch_parm->bw);
